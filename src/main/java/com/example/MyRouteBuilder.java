@@ -24,8 +24,7 @@ public class MyRouteBuilder extends RouteBuilder {
         ratios.add(2);
         ratios.add(1);
 
-        from("direct:start")
-                .loadBalance(new MyLoadBalancer(ratios))
-                .to("mock:x", "mock:y", "mock:z");
+        from("timer:someTimer")
+                .to("bean:myLoggingBean?method=action");
     }
 }
