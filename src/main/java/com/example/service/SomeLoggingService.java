@@ -13,6 +13,6 @@ public class SomeLoggingService {
 
     public String action(Object... arguments) {
         log.info(String.format("SomeLoggingService - Action() - %s", arguments));
-        return "Okie Dokie";
+        return "OK";
     }
 }

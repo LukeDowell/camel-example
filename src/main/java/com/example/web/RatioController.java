@@ -1,9 +1,7 @@
 package com.example.web;
 
+import com.example.service.ExampleApi;
 import com.example.service.RatioService;
-import com.example.service.TicketApi;
-import com.example.service.AnotherLoggingService;
-import com.example.service.SomeLoggingService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,29 +23,21 @@ public class RatioController {
     RatioService ratioService;
 
     @Autowired
-    TicketApi ticketApi;
+    ExampleApi exampleApi;
 
 
     @RequestMapping("/")
     public ResponseEntity ticketApiCall() {
-        ticketApi.action("Some String");
+        exampleApi.action("Some String");
         return new ResponseEntity(null, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/{ratio}", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity postDistribution(
-            @RequestParam int id,
+            @RequestParam int index,
             @RequestParam int ratio) {
 
-        switch(id) {
-            case 1:
-                ratioService.setCachedRatioOne(ratio);
-                break;
-
-            default:
-                ratioService.
-                break;
-        }
+        ratioService.updateRatio(index, ratio);
 
         return new ResponseEntity(null, HttpStatus.OK);
     }

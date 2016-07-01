@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
  * Created by ldowell on 6/30/16.
  */
 @Component
-public class MyRouteBuilder extends RouteBuilder {
-    private static final Log log = LogFactory.getLog(MyRouteBuilder.class);
+public class ExampleRouteBuilder extends RouteBuilder {
+    private static final Log log = LogFactory.getLog(ExampleRouteBuilder.class);
 
     @Autowired
     WeightedLoadBalancer weightedLoadBalancer;
@@ -20,6 +20,9 @@ public class MyRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         log.info("MyRouteBuilder - configure()");
+
+        from("timer:someTimer")
+                .to("direct:someName");
 
         from("direct:someName")
                 .loadBalance(weightedLoadBalancer)

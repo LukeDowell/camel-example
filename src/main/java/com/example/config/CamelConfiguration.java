@@ -1,6 +1,6 @@
 package com.example.config;
 
-import com.example.service.TicketApi;
+import com.example.service.ExampleApi;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.component.bean.ProxyHelper;
@@ -19,14 +19,15 @@ import java.util.List;
 @Configuration
 public class CamelConfiguration {
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     CamelContext camelContext;
 
     @Bean
-    TicketApi ticketApi() throws Exception {
-        // Create a proxy so that the endpoint is hit whenever we call TicketApi
+    ExampleApi exampleApi() throws Exception {
+        // Create a proxy so that the endpoint is hit whenever we make a call to ExampleApi
         Endpoint endpoint = camelContext.getEndpoint("direct:someName");
-        return ProxyHelper.createProxy(endpoint, TicketApi.class);
+        return ProxyHelper.createProxy(endpoint, ExampleApi.class);
     }
 
     @Bean
