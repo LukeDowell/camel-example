@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 public class SomeLoggingService {
     private static final Log log = LogFactory.getLog(SomeLoggingService.class);
 
-    private String action() {
-        log.info("SomeLoggingService - Action()");
-        return "OH OKAY";
+    public String action(Object... arguments) {
+        log.info(String.format("SomeLoggingService - Action() - %s", arguments));
+        return "Okie Dokie";
     }
 }
