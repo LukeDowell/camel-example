@@ -1,4 +1,4 @@
-package com.example;
+package com.example.camel;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -14,6 +14,8 @@ import java.util.List;
 public class MyLoadBalancer extends WeightedLoadBalancer {
     private Log log = LogFactory.getLog(MyLoadBalancer.class);
 
+
+
     public MyLoadBalancer(List<Integer> distributionRatios) {
         super(distributionRatios);
         log.info("MyLoadBalancer - constructor()");
@@ -21,7 +23,6 @@ public class MyLoadBalancer extends WeightedLoadBalancer {
 
     @Override
     protected Processor chooseProcessor(List<Processor> list, Exchange exchange) {
-        log.info("MyLoadBalancer - chooseProcessor()");
-        return null;
+        return list.stream().findFirst().get();
     }
 }

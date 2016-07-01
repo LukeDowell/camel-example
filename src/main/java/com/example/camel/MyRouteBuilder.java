@@ -1,4 +1,4 @@
-package com.example;
+package com.example.camel;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.commons.logging.Log;
@@ -20,11 +20,12 @@ public class MyRouteBuilder extends RouteBuilder {
         log.info("MyRouteBuilder - configure()");
 
         List<Integer> ratios = new ArrayList<>();
-        ratios.add(5);
         ratios.add(2);
         ratios.add(1);
 
         from("timer:someTimer")
-                .to("bean:myLoggingBean?method=action");
+                .loadBalance(new MyLoadBalancer(ratios))
+                .to("bean:anotherLoggingService?method=action")
+                .to("bean:someLoggingService?method=action");
     }
 }
