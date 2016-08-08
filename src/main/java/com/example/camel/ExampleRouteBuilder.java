@@ -21,12 +21,12 @@ public class ExampleRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         log.info("MyRouteBuilder - configure()");
 
-        from("timer:someTimer")
-                .to("direct:someName");
+//        from("timer:someTimer")
+//                .to("direct:someName");
 
         from("direct:someName")
                 .loadBalance(weightedLoadBalancer)
-                .to("bean:anotherLoggingService?method=action")
-                .to("bean:someLoggingService?method=action");
+                .to("bean:anotherProcessingService?method=action")
+                .to("bean:someProcessingService?method=action");
     }
 }

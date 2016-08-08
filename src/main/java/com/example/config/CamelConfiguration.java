@@ -27,7 +27,8 @@ public class CamelConfiguration {
     ExampleApi exampleApi() throws Exception {
         // Create a proxy so that the endpoint is hit whenever we make a call to ExampleApi
         Endpoint endpoint = camelContext.getEndpoint("direct:someName");
-        return ProxyHelper.createProxy(endpoint, ExampleApi.class);
+        ExampleApi exampleApi = ProxyHelper.createProxy(endpoint, ExampleApi.class);
+        return exampleApi;
     }
 
     @Bean

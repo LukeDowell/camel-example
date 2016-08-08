@@ -1,10 +1,12 @@
 package com.example.web;
 
+import com.example.SomePayload;
 import com.example.service.ExampleApi;
 import com.example.service.RatioService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,12 @@ public class RatioController {
 
     @RequestMapping("/")
     public ResponseEntity ticketApiCall() {
-        exampleApi.action("Some String");
-        return new ResponseEntity(null, HttpStatus.OK);
+        SomePayload somePayload = new SomePayload();
+        somePayload.setSomeAge(10);
+        somePayload.setSomeString("Some String");
+
+        SomePayload responsePayload = exampleApi.action(somePayload, "Godspeed!");
+        return new ResponseEntity(responsePayload, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
